@@ -22,7 +22,8 @@ abstract class :x:base {
   abstract public function setAttribute($attr, $val);
   abstract public function categoryOf($cat);
   abstract public function __toString();
-  abstract protected static function &__xhpAttributeDeclaration();
+// aizatto: ErrorException [ Strict ]: Static function xhp_x__base::__xhpAttributeDeclaration() should not be abstract
+// abstract protected static function &__xhpAttributeDeclaration();
   abstract protected function &__xhpCategoryDeclaration();
   abstract protected function &__xhpChildrenDeclaration();
 
@@ -55,6 +56,11 @@ abstract class :x:base {
 
   public static function class2element($class) {
     return str_replace(array('__', '_'), array(':', '-'), preg_replace('#^xhp_#i', '', $class));
+  }
+
+  // aizatto: ErrorException [ Fatal Error ]: Call to undefined method xhp_x_base::toString()
+  public function toString() {
+    return $this->__toString();
   }
 }
 
