@@ -472,6 +472,7 @@ class :map extends :xhp:html-element {
 
 class :meta extends :xhp:html-singleton {
   attribute
+    string property,
     string content @required,
     enum {
       "content-type", "content-style-type", "expires", "refresh", "set-cookie"
