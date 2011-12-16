@@ -1,73 +1,73 @@
 <?php
 
-class :symfony:input extends :ui:base {
+class xhp_symfony__input extends xhp_ui__base{
 
-  attribute
-    :input,
-    Symfony\Component\Form\FormView formview;
 
-  public function render() {
-    $formview = $this->getAttribute('formview');
-    
-    $types = $formview->get('types');
-    $type = end($types);
 
-    if ($type == 'textarea') {
-      return $this->renderTextArea();
-    }
 
-    switch (end($types)) {
-      case 'file':
-        $this->setAttribute('type', 'file');
-        break;
 
-      case 'checkbox':
-        $this->setAttribute('type', 'checkbox');
-        break;
+public function render(){
+$formview=$this->getAttribute('formview');
 
-      case 'entity':
-      case 'csrf':
-        $this->setAttribute('type', 'hidden');
-        break;
-        
-      case 'text':
-        $this->setAttribute('type', 'text');
-        break;
-    };
+$types=$formview->get('types');
+$type=end($types);
 
-    return $this->renderField();
-  }
+if($type=='textarea'){
+return $this->renderTextArea();
+}
 
-  protected function renderField() {
-    $formview = $this->getAttribute('formview');
-    $input = <input />;
+switch(end($types)){
+case 'file':
+$this->setAttribute('type','file');
+break;
 
-    $this->transferFormViewAttributes($input, array('formview'))
-      ->setAttribute('value', $formview->get('value'));
+case 'checkbox':
+$this->setAttribute('type','checkbox');
+break;
 
-    if ($this->getAttribute('type') == 'checkbox' &&
-        $formview->get('checked')) {
-      $input->setAttribute('checked', 'checked');
-    }
+case 'entity':
+case 'csrf':
+$this->setAttribute('type','hidden');
+break;
 
-    return $input;
-  }
+case 'text':
+$this->setAttribute('type','text');
+break;
+};
 
-  protected function renderTextArea() {
-    $textarea = <textarea>{$this->getAttribute('formview')->get('value')}</textarea>;
-    $this->transferFormViewAttributes($textarea);
+return $this->renderField();
+}
 
-    return $textarea;
-  }
+protected function renderField(){
+$formview=$this->getAttribute('formview');
+$input=new xhp_input(array(), array(), __FILE__, 43);
 
-  private function transferFormViewAttributes($element) {
-    $formview = $this->getAttribute('formview');
-    $element
-      ->setAttribute('id', $formview->get('id'))
-      ->setAttribute('name', $formview->get('full_name'));
+$this->transferFormViewAttributes($input,array('formview'))
+->setAttribute('value',$formview->get('value'));
 
-    $this->transferAttributes($element, array('formview'));
-    return $element;
-  }
+if($this->getAttribute('type')=='checkbox'&&
+$formview->get('checked')){
+$input->setAttribute('checked','checked');
+}
+
+return $input;
+}
+
+protected function renderTextArea(){
+$textarea=new xhp_textarea(array(), array($this->getAttribute('formview')->get('value'),), __FILE__, 57);
+$this->transferFormViewAttributes($textarea);
+
+return $textarea;
+}
+
+private function transferFormViewAttributes($element){
+$formview=$this->getAttribute('formview');
+$element
+->setAttribute('id',$formview->get('id'))
+->setAttribute('name',$formview->get('full_name'));
+
+$this->transferAttributes($element,array('formview'));
+return $element;
+}protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), xhp_input::__xhpAttributeDeclaration(),array('formview'=>array(5, 'Symfony\Component\Form\FormView',null, 0),));}return $_;}
 
 }

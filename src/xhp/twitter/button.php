@@ -1,9 +1,9 @@
 <?php
 
-class :twitter:button extends :twitter:submit {
+class xhp_twitter__button extends xhp_twitter__submit{
 
-  private function renderElement() {
-    return <button class="btn" />;
-  }
+private function renderElement(){
+return new xhp_button(array('class' => 'btn',), array(), __FILE__, 6);
+}
 
 }
