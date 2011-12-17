@@ -1,6 +1,6 @@
 <?php
 
-class :symfony:input extends :ui:base {
+class :symfony:input extends :symfony:base {
 
   attribute
     :input,

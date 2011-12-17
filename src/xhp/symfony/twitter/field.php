@@ -1,6 +1,6 @@
 <?php
 
-class :symfony:twitter:field extends :ui:base {
+class :symfony:twitter:field extends :symfony:base {
 
   attribute
     :input,

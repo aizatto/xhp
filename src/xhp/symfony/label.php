@@ -1,6 +1,6 @@
 <?php
 
-class :symfony:label extends :ui:base {
+class :symfony:label extends :symfony:base {
   
   attribute
     :label,

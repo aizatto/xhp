@@ -21,10 +21,12 @@ class :ui:base extends :x:element {
   }
 
 
-  public function transferAttributes(:x:base $element, $ignore = array()) {
-    $attributes = $this->getAttributes();
+  public function transferAttributes(:x:base $element, array $ignore = array()) {
+    $attributes = $this->__xhpAttributeDeclaration();
     if ($ignore) {
-      $attributes = array_diff_key($attributes, array_flip($ignore));
+      foreach ($ignore as $key => $value) {
+        unset($attributes[$key]);
+      }
     }
 
     $supported = $element->__xhpAttributeDeclaration();
@@ -34,7 +36,7 @@ class :ui:base extends :x:element {
         continue;
       }
 
-      $element->setAttribute($key, $value);
+      $element->setAttribute($key, $this->getAttribute($key));
     }
     return $element;
   }
