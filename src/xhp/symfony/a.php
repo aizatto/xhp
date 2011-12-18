@@ -22,7 +22,8 @@ class :symfony:a extends :symfony:base {
       $this->setAttribute('href', $href);
     }
 
-    $element = <a>{$this->getChildren()}</a>; 
+    $element = <a />;
+    $element->appendchild($this->getChildren());
     $this->transferAttributes($element);
     return $element;
   }

@@ -20,12 +20,17 @@ class :ui:base extends :x:element {
     return $this;
   }
 
+  public function transferToElement($element, $ignore = array()) {
+    $element->appendChild($this->getChildren());
+    $this->transferAttributes($element, $ignore);
+    return $element;
+  }
 
-  public function transferAttributes(:x:base $element, array $ignore = array()) {
+  public function transferAttributes(:x:base $element, $ignore = array()) {
     $attributes = $this->__xhpAttributeDeclaration();
     if ($ignore) {
-      foreach ($ignore as $key => $value) {
-        unset($attributes[$key]);
+      foreach ((array) $ignore as $key => $value) {
+        unset($attributes[$value]);
       }
     }
 
