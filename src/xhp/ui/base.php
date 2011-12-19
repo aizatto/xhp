@@ -41,7 +41,9 @@ class :ui:base extends :x:element {
         continue;
       }
 
-      $element->setAttribute($key, $this->getAttribute($key));
+      if ($value = $this->getAttribute($key)) {
+        $element->setAttribute($key, $value);
+      }
     }
     return $element;
   }
