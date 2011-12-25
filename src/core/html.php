@@ -415,9 +415,10 @@ class :input extends :xhp:html-singleton {
     bool readonly, int size, string src,
     enum {
       "button", "checkbox", "file", "hidden", "image", "password", "radio",
-      "reset", "submit", "text"
+      "reset", "submit", "text", "email"
     } type,
-    string value;
+    string value,
+    bool required;
   category %flow, %phrase, %interactive;
   protected $tagName = 'input';
 }
@@ -655,7 +656,7 @@ class :td extends :xhp:html-element {
 }
 
 class :textarea extends :xhp:pseudo-singleton {
-  attribute int cols, int rows, bool disabled, string name, bool readonly;
+  attribute int cols, int rows, bool disabled, string name, bool readonly, bool required;
   category %flow, %phrase, %interactive;
   protected $tagName = 'textarea';
 }
@@ -739,4 +740,10 @@ class :x:doctype extends :x:primitive {
     $children = $this->getChildren();
     return '<!DOCTYPE html>' . (:x:base::renderChild($children[0]));
   }
+}
+
+class :section extends :xhp:html-element {
+  category %flow;
+  children (pcdata | %flow)*;
+  protected $tagName = 'div';
 }

@@ -64,7 +64,8 @@ class :symfony:input extends :symfony:base {
     $formview = $this->getAttribute('formview');
     $element
       ->setAttribute('id', $formview->get('id'))
-      ->setAttribute('name', $formview->get('full_name'));
+      ->setAttribute('name', $formview->get('full_name'))
+      ->setAttribute('required', $formview->get('required'));
 
     $this->transferAttributes($element, array('formview'));
     return $element;

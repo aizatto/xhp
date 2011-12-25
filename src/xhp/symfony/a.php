@@ -1,31 +1,14 @@
 <?php
 
-class :symfony:a extends :symfony:base {
+class :symfony:a extends :symfony:route {
 
   attribute
-    :a,
-    string route,
-    array params;
+    :a;
 
   public function render() {
-    $route = $this->getAttribute('route');
+    $this->setAttribute('href', $this->getPath());
 
-    if ($route) {
-      $params = $this->getAttribute('params');
-      if (!is_array($params)) {
-        $params = array();
-      }
-
-      $router = self::$container->get('router');
-      $href = $router->generate($route, $params);
-
-      $this->setAttribute('href', $href);
-    }
-
-    $element = <a />;
-    $element->appendchild($this->getChildren());
-    $this->transferAttributes($element);
-    return $element;
+    return $this->transferToElement(<a />);
   }
 
 }
