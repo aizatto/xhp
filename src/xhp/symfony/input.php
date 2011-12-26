@@ -22,6 +22,10 @@ class :symfony:input extends :symfony:base {
         $this->setAttribute('type', 'file');
         break;
 
+      case 'radio':
+        $this->setAttribute('type', 'radio');
+        break;
+
       case 'checkbox':
         $this->setAttribute('type', 'checkbox');
         break;
@@ -33,6 +37,11 @@ class :symfony:input extends :symfony:base {
         
       case 'text':
         $this->setAttribute('type', 'text');
+        break;
+
+      case 'email':
+      case 'password':
+        $this->addClass('text');
         break;
     };
 
