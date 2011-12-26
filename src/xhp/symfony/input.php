@@ -11,6 +11,7 @@ class :symfony:input extends :symfony:base {
     
     $types = $formview->get('types');
     $type = end($types);
+    $this->addClass($type);
 
     if ($type == 'textarea') {
       return $this->renderTextArea();
