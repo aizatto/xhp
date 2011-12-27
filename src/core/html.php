@@ -46,7 +46,10 @@ abstract class :xhp:html-element extends :x:primitive {
     // TODO:
     string selected, string otherButtonLabel, string otherButtonHref,
     string otherButtonClass, string type, string replaceCaret,
-    string replaceChildren;
+    string replaceChildren,
+    
+    // Javelin
+    string data-sigil, string data-meta;
 
 
   protected
