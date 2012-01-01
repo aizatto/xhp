@@ -9,6 +9,7 @@ class :symfony:form extends :symfony:route {
   public function render() {
     $this->setAttribute('action', $this->getPath());
     $element = <form />;
+
     if ($formview = $this->getAttribute('formview')) {
       $children = $formview->getChildren();
       foreach ($children as $child) {
@@ -24,7 +25,7 @@ class :symfony:form extends :symfony:route {
         }
 
         $element->appendChild(
-          <symfony:input formview={$children['_token']} />
+          <symfony:input formview={$child} />
         );
       }
 
@@ -32,6 +33,7 @@ class :symfony:form extends :symfony:route {
         $element->setAttribute('enctype', 'multipart/form-data');
       }
     }
+
 
     return $this->transferToElement($element);
   }
