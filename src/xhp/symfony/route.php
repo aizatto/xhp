@@ -21,13 +21,5 @@ abstract class :symfony:route extends :symfony:base {
     $router = self::$container->get('router');
     return $router->generate($route, $params);
   }
-  attribute
-    :a;
-
-  public function render() {
-    $this->setAttribute('href', $this->getPath());
-
-    return $this->transferToElement(<a />);
-  }
 
 }

@@ -748,5 +748,11 @@ class :x:doctype extends :x:primitive {
 class :section extends :xhp:html-element {
   category %flow;
   children (pcdata | %flow)*;
-  protected $tagName = 'div';
+  protected $tagName = 'section';
+}
+
+class :footer extends :xhp:html-element {
+  category %flow;
+  children (pcdata | %flow)*;
+  protected $tagName = 'footer';
 }
