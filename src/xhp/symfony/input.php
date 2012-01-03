@@ -13,11 +13,15 @@ class :symfony:input extends :symfony:base {
     $type = end($types);
     $this->addClass($type);
 
-    if ($type == 'textarea') {
-      return $this->renderTextArea();
-    }
+    switch ($type) {
+      case 'textarea':
+        return $this->renderTextArea();
+        break;
 
-    switch (end($types)) {
+      case 'choice':
+        return $this->renderChoice();
+        break;
+
       case 'file':
         $this->setAttribute('type', 'file');
         break;
@@ -70,7 +74,79 @@ class :symfony:input extends :symfony:base {
     return $textarea;
   }
 
-  private function transferFormViewAttributes($element) {
+  protected function renderChoice() {
+    $formview = $this->getAttribute('formview');
+
+    if ($formview->get('expanded')) {
+      if ($formview->get('multiple')) {
+        $content = $this->renderChoiceCheckbox();
+      } else {
+        $content = $this->renderChoiceRadio();
+      }
+
+      return
+        <x:frag>
+          {$content}
+        </x:frag>;
+    } else {
+      return $this->renderChoiceSelect();
+    }
+  }
+
+  protected function renderChoiceCheckbox() {
+    $formview = $this->getAttribute('formview');
+    $choices = $formview->get('choices');
+    $html = array();
+    foreach ($choices as $value => $option) {
+      $input = <input type="checkbox" value={$value} />;
+      $this->transferFormViewAttributes($input);
+      $html[] =
+        <label>
+          {$input}
+          {$option}
+        </label>;
+    }
+
+    return $html;
+  }
+
+  protected function renderChoiceRadio() {
+    $formview = $this->getAttribute('formview');
+    $choices = $formview->get('choices');
+    $html = array();
+    foreach ($choices as $value => $option) {
+      $input = <input type="radio" value={$value} />;
+      $this->transferFormViewAttributes($input);
+      $html[] =
+        <label>
+          {$input}
+          {$option}
+        </label>;
+    }
+
+    return $html;
+  }
+
+  protected function renderChoiceSelect() {
+    $formview = $this->getAttribute('formview');
+    $choices = $formview->get('choices');
+    $options = array();
+    foreach ($choices as $value => $option) {
+      $options[] =
+        <option value={$value}>
+          {$option}
+        </option>;
+    }
+
+    $element =
+      <select>
+        {$options}
+      </select>;
+
+    return $this->transferFormViewAttributes($element);
+  }
+
+  protected function transferFormViewAttributes($element) {
     $formview = $this->getAttribute('formview');
     $element
       ->setAttribute('id', $formview->get('id'))
