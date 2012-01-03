@@ -572,7 +572,7 @@ class :script extends :xhp:pseudo-singleton {
 }
 
 class :select extends :xhp:html-element {
-  attribute bool disabled, bool multiple, string name, int size;
+  attribute bool disabled, bool multiple, string name, int size, bool required;
   category %flow, %phrase, %interactive;
   children (:option | :optgroup)*;
   protected $tagName = 'select';
