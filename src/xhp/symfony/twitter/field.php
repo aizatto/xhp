@@ -1,6 +1,6 @@
 <?php
 
-class xhp_symfony__twitter__field extends xhp_ui__base{
+class xhp_symfony__twitter__field extends xhp_symfony__base{
 
 
 

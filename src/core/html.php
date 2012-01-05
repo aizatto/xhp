@@ -49,6 +49,9 @@ abstract class xhp_xhp__html_element extends xhp_x__primitive{
 
 
 
+
+
+
 protected 
 $tagName;
 
@@ -91,7 +94,7 @@ $buf.=xhp_x__base::renderChild($child);
 }
 $buf.='</'.$this->tagName.'>';
 return $buf;
-}protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('accesskey'=>array(1, null,null, 0),'class'=>array(1, null,null, 0),'dir'=>array(1, null,null, 0),'id'=>array(1, null,null, 0),'lang'=>array(1, null,null, 0),'style'=>array(1, null,null, 0),'tabindex'=>array(1, null,null, 0),'title'=>array(1, null,null, 0),'onabort'=>array(1, null,null, 0),'onblur'=>array(1, null,null, 0),'onchange'=>array(1, null,null, 0),'onclick'=>array(1, null,null, 0),'ondblclick'=>array(1, null,null, 0),'onerror'=>array(1, null,null, 0),'onfocus'=>array(1, null,null, 0),'onkeydown'=>array(1, null,null, 0),'onkeypress'=>array(1, null,null, 0),'onkeyup'=>array(1, null,null, 0),'onload'=>array(1, null,null, 0),'onmousedown'=>array(1, null,null, 0),'onmousemove'=>array(1, null,null, 0),'onmouseout'=>array(1, null,null, 0),'onmouseover'=>array(1, null,null, 0),'onmouseup'=>array(1, null,null, 0),'onreset'=>array(1, null,null, 0),'onresize'=>array(1, null,null, 0),'onselect'=>array(1, null,null, 0),'onsubmit'=>array(1, null,null, 0),'onunload'=>array(1, null,null, 0),'onmouseenter'=>array(1, null,null, 0),'onmouseleave'=>array(1, null,null, 0),'selected'=>array(1, null,null, 0),'otherButtonLabel'=>array(1, null,null, 0),'otherButtonHref'=>array(1, null,null, 0),'otherButtonClass'=>array(1, null,null, 0),'type'=>array(1, null,null, 0),'replaceCaret'=>array(1, null,null, 0),'replaceChildren'=>array(1, null,null, 0),));}return $_;}
+}protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('accesskey'=>array(1, null,null, 0),'class'=>array(1, null,null, 0),'dir'=>array(1, null,null, 0),'id'=>array(1, null,null, 0),'lang'=>array(1, null,null, 0),'style'=>array(1, null,null, 0),'tabindex'=>array(1, null,null, 0),'title'=>array(1, null,null, 0),'onabort'=>array(1, null,null, 0),'onblur'=>array(1, null,null, 0),'onchange'=>array(1, null,null, 0),'onclick'=>array(1, null,null, 0),'ondblclick'=>array(1, null,null, 0),'onerror'=>array(1, null,null, 0),'onfocus'=>array(1, null,null, 0),'onkeydown'=>array(1, null,null, 0),'onkeypress'=>array(1, null,null, 0),'onkeyup'=>array(1, null,null, 0),'onload'=>array(1, null,null, 0),'onmousedown'=>array(1, null,null, 0),'onmousemove'=>array(1, null,null, 0),'onmouseout'=>array(1, null,null, 0),'onmouseover'=>array(1, null,null, 0),'onmouseup'=>array(1, null,null, 0),'onreset'=>array(1, null,null, 0),'onresize'=>array(1, null,null, 0),'onselect'=>array(1, null,null, 0),'onsubmit'=>array(1, null,null, 0),'onunload'=>array(1, null,null, 0),'onmouseenter'=>array(1, null,null, 0),'onmouseleave'=>array(1, null,null, 0),'selected'=>array(1, null,null, 0),'otherButtonLabel'=>array(1, null,null, 0),'otherButtonHref'=>array(1, null,null, 0),'otherButtonClass'=>array(1, null,null, 0),'type'=>array(1, null,null, 0),'replaceCaret'=>array(1, null,null, 0),'replaceChildren'=>array(1, null,null, 0),'data-sigil'=>array(1, null,null, 0),'data-meta'=>array(1, null,null, 0),));}return $_;}
 }
 
 /**
@@ -418,8 +421,9 @@ class xhp_input extends xhp_xhp__html_singleton{
 
 
 
+
 protected function &__xhpCategoryDeclaration() {static $_ = array('flow' => 1,'phrase' => 1,'interactive' => 1);return $_;}
-protected $tagName='input';protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('autocomplete'=>array(7, array("on", "off"),null, 0),'placeholder'=>array(1, null,null, 0),'accept'=>array(1, null,null, 0),'align'=>array(7, array("left", "right", "top", "middle", "bottom"),null, 0),'alt'=>array(1, null,null, 0),'checked'=>array(2, null,null, 0),'disabled'=>array(2, null,null, 0),'maxlength'=>array(3, null,null, 0),'name'=>array(1, null,null, 0),'readonly'=>array(2, null,null, 0),'size'=>array(3, null,null, 0),'src'=>array(1, null,null, 0),'type'=>array(7, array("button", "checkbox", "file", "hidden", "image", "password", "radio", "reset", "submit", "text"),null, 0),'value'=>array(1, null,null, 0),));}return $_;}
+protected $tagName='input';protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('autocomplete'=>array(7, array("on", "off"),null, 0),'placeholder'=>array(1, null,null, 0),'accept'=>array(1, null,null, 0),'align'=>array(7, array("left", "right", "top", "middle", "bottom"),null, 0),'alt'=>array(1, null,null, 0),'checked'=>array(2, null,null, 0),'disabled'=>array(2, null,null, 0),'maxlength'=>array(3, null,null, 0),'name'=>array(1, null,null, 0),'readonly'=>array(2, null,null, 0),'size'=>array(3, null,null, 0),'src'=>array(1, null,null, 0),'type'=>array(7, array("button", "checkbox", "file", "hidden", "image", "password", "radio", "reset", "submit", "text", "email"),null, 0),'value'=>array(1, null,null, 0),'required'=>array(2, null,null, 0),));}return $_;}
 }
 
 class xhp_ins extends xhp_xhp__html_element{
@@ -571,7 +575,7 @@ class xhp_select extends xhp_xhp__html_element{
 
 protected function &__xhpCategoryDeclaration() {static $_ = array('flow' => 1,'phrase' => 1,'interactive' => 1);return $_;}
 protected function &__xhpChildrenDeclaration() {static $_ = array(1, 5, array(5, array(0, 3, 'xhp_option'),array(0, 3, 'xhp_optgroup'))); return $_;}
-protected $tagName='select';protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('disabled'=>array(2, null,null, 0),'multiple'=>array(2, null,null, 0),'name'=>array(1, null,null, 0),'size'=>array(3, null,null, 0),));}return $_;}
+protected $tagName='select';protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('disabled'=>array(2, null,null, 0),'multiple'=>array(2, null,null, 0),'name'=>array(1, null,null, 0),'size'=>array(3, null,null, 0),'required'=>array(2, null,null, 0),));}return $_;}
 }
 
 class xhp_small extends xhp_xhp__html_element{
@@ -657,7 +661,7 @@ protected $tagName='td';protected static function &__xhpAttributeDeclaration() {
 class xhp_textarea extends xhp_xhp__pseudo_singleton{
 
 protected function &__xhpCategoryDeclaration() {static $_ = array('flow' => 1,'phrase' => 1,'interactive' => 1);return $_;}
-protected $tagName='textarea';protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('cols'=>array(3, null,null, 0),'rows'=>array(3, null,null, 0),'disabled'=>array(2, null,null, 0),'name'=>array(1, null,null, 0),'readonly'=>array(2, null,null, 0),));}return $_;}
+protected $tagName='textarea';protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), array('cols'=>array(3, null,null, 0),'rows'=>array(3, null,null, 0),'disabled'=>array(2, null,null, 0),'name'=>array(1, null,null, 0),'readonly'=>array(2, null,null, 0),'required'=>array(2, null,null, 0),));}return $_;}
 }
 
 class xhp_tfoot extends xhp_xhp__html_element{
@@ -739,4 +743,16 @@ protected function stringify(){
 $children=$this->getChildren();
 return '<!DOCTYPE html>'.(xhp_x__base::renderChild($children[0]));
 }
+}
+
+class xhp_section extends xhp_xhp__html_element{
+protected function &__xhpCategoryDeclaration() {static $_ = array('flow' => 1);return $_;}
+protected function &__xhpChildrenDeclaration() {static $_ = array(1, 5, array(5, array(0, 2, null),array(0, 4, 'flow'))); return $_;}
+protected $tagName='section';
+}
+
+class xhp_footer extends xhp_xhp__html_element{
+protected function &__xhpCategoryDeclaration() {static $_ = array('flow' => 1);return $_;}
+protected function &__xhpChildrenDeclaration() {static $_ = array(1, 5, array(5, array(0, 2, null),array(0, 4, 'flow'))); return $_;}
+protected $tagName='footer';
 }

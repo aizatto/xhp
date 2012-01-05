@@ -20,11 +20,18 @@ $this->setAttribute('class',trim($currentClasses.' '.$class));
 return $this;
 }
 
+public function transferToElement($element,$ignore=array()){
+$element->appendChild($this->getChildren());
+$this->transferAttributes($element,$ignore);
+return $element;
+}
 
 public function transferAttributes(xhp_x__base $element,$ignore=array()){
-$attributes=$this->getAttributes();
+$attributes=$this->__xhpAttributeDeclaration();
 if($ignore){
-$attributes=array_diff_key($attributes,array_flip($ignore));
+foreach((array)$ignore as $key=>$value){
+unset($attributes[$value]);
+}
 }
 
 $supported=$element->__xhpAttributeDeclaration();
@@ -34,7 +41,9 @@ if(!isset($supported[$key])){
 continue;
 }
 
+if($value=$this->getAttribute($key)){
 $element->setAttribute($key,$value);
+}
 }
 return $element;
 }protected static function &__xhpAttributeDeclaration() {static $_ = -1;if ($_ === -1) {$_ = array_merge(parent::__xhpAttributeDeclaration(), xhp_xhp__html_element::__xhpAttributeDeclaration(),array());}return $_;}

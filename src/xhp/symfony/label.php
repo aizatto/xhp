@@ -1,6 +1,6 @@
 <?php
 
-class xhp_symfony__label extends xhp_ui__base{
+class xhp_symfony__label extends xhp_symfony__base{
 
 
 
