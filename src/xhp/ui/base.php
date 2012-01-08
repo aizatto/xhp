@@ -20,6 +20,16 @@ class :ui:base extends :x:element {
     return $this;
   }
 
+  // copied from :xhp:html-element
+  public function getID() {
+    // TODO: Implement something on AsyncRequest that returns the number of
+    //       requests sent so far so we can remove the microtime(true) thing.
+    if (!($id = $this->getAttribute('id'))) {
+      $this->setAttribute('id', $id = substr(md5(mt_rand(0, 100000)), 0, 10));
+    }
+    return $id;
+  }
+
   public function transferToElement($element, $ignore = array()) {
     $element->appendChild($this->getChildren());
     $this->transferAttributes($element, $ignore);

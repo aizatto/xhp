@@ -95,6 +95,10 @@ abstract class :xhp:html-element extends :x:primitive {
     $buf .= '</'.$this->tagName.'>';
     return $buf;
   }
+
+  public function getID() {
+    return $this->requireUniqueId();
+  }
 }
 
 /**

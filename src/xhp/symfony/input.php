@@ -9,17 +9,26 @@ class :symfony:input extends :symfony:base {
   public function render() {
     $formview = $this->getAttribute('formview');
     
-    $types = $formview->get('types');
-    $type = end($types);
+    if ($formview) {
+      $types = $formview->get('types');
+      $type = end($types);
+    } else {
+      $type = $this->getAttribute('type');
+    }
+
     $this->addClass($type);
 
     switch ($type) {
-      case 'textarea':
-        return $this->renderTextArea();
-        break;
-
       case 'choice':
         return $this->renderChoice();
+        break;
+
+      case 'date':
+        return $this->renderDate();
+        break;
+
+      case 'textarea':
+        return $this->renderTextArea();
         break;
 
       case 'file':
@@ -53,25 +62,22 @@ class :symfony:input extends :symfony:base {
   }
 
   protected function renderField() {
-    $formview = $this->getAttribute('formview');
     $input = <input />;
 
-    $this->transferFormViewAttributes($input, array('formview'))
-      ->setAttribute('value', $formview->get('value'));
+    $formview = $this->getAttribute('formview');
+    if ($formview) {
+      $this->transferFormViewAttributes($input)
+        ->setAttribute('value', $formview->get('value'));
 
-    if ($this->getAttribute('type') == 'checkbox' &&
-        $formview->get('checked')) {
-      $input->setAttribute('checked', 'checked');
+      if ($this->getAttribute('type') == 'checkbox' &&
+          $formview->get('checked')) {
+        $input->setAttribute('checked', 'checked');
+      }
+    } else {
+      $this->transferAttributes($input);
     }
 
     return $input;
-  }
-
-  protected function renderTextArea() {
-    $textarea = <textarea>{$this->getAttribute('formview')->get('value')}</textarea>;
-    $this->transferFormViewAttributes($textarea);
-
-    return $textarea;
   }
 
   protected function renderChoice() {
@@ -146,6 +152,41 @@ class :symfony:input extends :symfony:base {
     return $this->transferFormViewAttributes($element);
   }
 
+  protected function renderDate() {
+    $formview = $this->getAttribute('formview');
+    $widget = $formview->get('widget');
+  
+    switch ($widget) {
+      case 'text':
+        return $this->renderDateText();
+        break;
+    }
+
+    throw new \Exception(sprintf('Unexpected widget: %s', $widget));
+  }
+  protected function renderDateText() {
+    $formview = $this->getAttribute('formview');
+
+    $html = array();
+    foreach ($formview->getChildren() as $child) {
+      $html[] =
+        <symfony:input
+          formview={$child}
+        />;
+    }
+
+    $element = <div>{$html}</div>;
+    $element->setAttribute('id', $formview->get('id'));
+    return $this->transferAttributes($element);
+  }
+
+  protected function renderTextArea() {
+    $textarea = <textarea>{$this->getAttribute('formview')->get('value')}</textarea>;
+    $this->transferFormViewAttributes($textarea);
+
+    return $textarea;
+  }
+
   protected function transferFormViewAttributes($element) {
     $formview = $this->getAttribute('formview');
     $element
@@ -153,7 +194,11 @@ class :symfony:input extends :symfony:base {
       ->setAttribute('name', $formview->get('full_name'))
       ->setAttribute('required', $formview->get('required'));
 
-    $this->transferAttributes($element, array('formview'));
+    foreach ($formview->get('attr') as $key => $value) {
+      $element->setAttribute($key, $value);
+    }
+
+    $this->transferAttributes($element);
     return $element;
   }
 
