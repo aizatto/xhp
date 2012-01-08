@@ -69,7 +69,8 @@ class :symfony:input extends :symfony:base {
       $this->transferFormViewAttributes($input)
         ->setAttribute('value', $formview->get('value'));
 
-      if ($this->getAttribute('type') == 'checkbox' &&
+      $type = $this->getAttribute('type');
+      if (($type == 'checkbox' || $type == 'radio') &&
           $formview->get('checked')) {
         $input->setAttribute('checked', 'checked');
       }
@@ -84,49 +85,25 @@ class :symfony:input extends :symfony:base {
     $formview = $this->getAttribute('formview');
 
     if ($formview->get('expanded')) {
-      if ($formview->get('multiple')) {
-        $content = $this->renderChoiceCheckbox();
-      } else {
-        $content = $this->renderChoiceRadio();
-      }
-
       return
         <x:frag>
-          {$content}
+          {$this->renderChoiceExpanded()}
         </x:frag>;
     } else {
       return $this->renderChoiceSelect();
     }
   }
 
-  protected function renderChoiceCheckbox() {
+  protected function renderChoiceExpanded() {
     $formview = $this->getAttribute('formview');
-    $choices = $formview->get('choices');
+    $children = $formview->getChildren();
+
     $html = array();
-    foreach ($choices as $value => $option) {
-      $input = <input type="checkbox" value={$value} />;
-      $this->transferFormViewAttributes($input);
+    foreach ($children as $child) {
       $html[] =
         <label>
-          {$input}
-          {$option}
-        </label>;
-    }
-
-    return $html;
-  }
-
-  protected function renderChoiceRadio() {
-    $formview = $this->getAttribute('formview');
-    $choices = $formview->get('choices');
-    $html = array();
-    foreach ($choices as $value => $option) {
-      $input = <input type="radio" value={$value} />;
-      $this->transferFormViewAttributes($input);
-      $html[] =
-        <label>
-          {$input}
-          {$option}
+          <symfony:input formview={$child} />
+          {$child->get('label')}
         </label>;
     }
 
@@ -136,12 +113,20 @@ class :symfony:input extends :symfony:base {
   protected function renderChoiceSelect() {
     $formview = $this->getAttribute('formview');
     $choices = $formview->get('choices');
+    $selected_value = $formview->get('value');
+
     $options = array();
     foreach ($choices as $value => $option) {
-      $options[] =
+      $option =
         <option value={$value}>
           {$option}
         </option>;
+
+      if ($selected_value == $value) {
+        $option->setAttribute('selected', true);
+      }
+
+      $options[] = $option;
     }
 
     $element =
