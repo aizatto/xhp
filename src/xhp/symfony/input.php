@@ -19,6 +19,7 @@ class :symfony:input extends :symfony:base {
     $this->addClass($type);
 
     switch ($type) {
+      case 'entity':
       case 'choice':
         return $this->renderChoice();
         break;
@@ -73,6 +74,10 @@ class :symfony:input extends :symfony:base {
       if (($type == 'checkbox' || $type == 'radio') &&
           $formview->get('checked')) {
         $input->setAttribute('checked', 'checked');
+      }
+
+      if ($value = $formview->get('max_length')) {
+        $input->setAttribute('maxlength', $value);
       }
     } else {
       $this->transferAttributes($input);
