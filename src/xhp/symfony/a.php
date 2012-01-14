@@ -6,7 +6,9 @@ class :symfony:a extends :symfony:route {
     :a;
 
   public function render() {
-    $this->setAttribute('href', $this->getPath());
+    if (!$this->getAttribute('href')) {
+      $this->setAttribute('href', $this->getPath());
+    }
 
     return $this->transferToElement(<a />);
   }
