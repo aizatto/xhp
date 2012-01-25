@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Sample:
+ *
+ *   <body>
+ *     <symfony:hermes:scripts />
+ *     <javelin:footer />
+ *   </body>
+ */
 class :symfony:hermes:scripts extends :symfony:base {
 
   public function render() {
