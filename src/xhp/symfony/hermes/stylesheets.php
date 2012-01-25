@@ -1,21 +1,15 @@
 <?php
 
-class :symfony:hermes:stylesheets extends :symfony:base {
+class :symfony:hermes:stylesheets extends :symfony:hermes:base {
 
-  public function render() {
-    $hermes = self::$container->get('hermes');
-    $router = self::$container->get('router');
+  protected function getAssetManagerContainer() {
+    return self::$container->get('hermes')->stylesheets;
+  }
 
-    $stylesheets = array();
-    foreach ($hermes->flushCSS() as $asset) {
-      $url = $router->generate('hermes', array('id' => $asset));
-      $stylesheets[] = <link rel="stylesheet" href={$url} ></link>;
-    }
-
-    return
-      <x:frag>
-        {$stylesheets}
-      </x:frag>;
+  public function renderAsset($asset) {
+    $url = self::$container->get('router')
+      ->generate('hermes_css', array('id' => $asset));
+    return <link rel="stylesheet" href={$url} ></link>;
   }
 
 }

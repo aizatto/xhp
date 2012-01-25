@@ -8,22 +8,16 @@
  *     <javelin:footer />
  *   </body>
  */
-class :symfony:hermes:scripts extends :symfony:base {
+class :symfony:hermes:scripts extends :symfony:hermes:base {
 
-  public function render() {
-    $hermes = self::$container->get('hermes');
-    $router = self::$container->get('router');
+  protected function getAssetManagerContainer() {
+    return self::$container->get('hermes')->scripts;
+  }
 
-    $scripts = array();
-    foreach ($hermes->flushJS() as $asset) {
-      $url = $router->generate('hermes', array('id' => $asset));
-      $scripts[] = <script type="text/javascript" src={$url} ></script>;
-    }
-
-    return
-      <x:frag>
-        {$scripts}
-      </x:frag>;
+  public function renderAsset($asset) {
+    $url = self::$container->get('router')
+      ->generate('hermes_js', array('id' => $asset));
+    return <script type="text/javascript" src={$url} ></script>;
   }
 
 }
