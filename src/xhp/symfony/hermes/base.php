@@ -16,13 +16,12 @@ abstract class :symfony:hermes:base extends :symfony:base {
 
     if ($assets) { 
       $assets = array_keys($hermes->resolveResources($assets));
-      foreach ($assets as $asset) {
-        $html[] = $this->renderAsset($asset);
-      }
     } else {
-      foreach ($hermes->flush() as $asset) {
-        $html[] = $this->renderAsset($asset);
-      }
+      $assets = array_keys($hermes->flush());
+    }
+
+    foreach ($assets as $asset) {
+      $html[] = $this->renderAsset($asset);
     }
 
     return

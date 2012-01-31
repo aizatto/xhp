@@ -15,8 +15,8 @@ class :symfony:hermes:scripts extends :symfony:hermes:base {
   }
 
   public function renderAsset($asset) {
-    $url = self::$container->get('router')
-      ->generate('hermes_js', array('id' => $asset));
+    $url = self::$container->get('hermes')->getURL('js', $asset);
+
     return <script type="text/javascript" src={$url} ></script>;
   }
 
