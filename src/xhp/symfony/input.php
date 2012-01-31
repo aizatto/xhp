@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * http://symfony.com/doc/current/reference/forms/types.html
+ *
+ * Example:
+ *
+ *   <symfony:input formview={$formview['name']} />
+ */
 class :symfony:input extends :symfony:base {
 
   attribute
@@ -30,6 +37,10 @@ class :symfony:input extends :symfony:base {
 
       case 'textarea':
         return $this->renderTextArea();
+        break;
+
+      case 'hidden':
+        $this->setAttribute('type', 'hidden');
         break;
 
       case 'file':
