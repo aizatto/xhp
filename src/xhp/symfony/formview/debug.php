@@ -26,10 +26,12 @@ class :symfony:formview:debug extends :symfony:base {
     $html = array();
     foreach ($vars as $key => $var) {
       $string = '';
-      if (!is_object($var)) {
+      if ($var === true) {
+        $string = 'true';
+      } else if ($var === false) {
+        $string = 'false';
+      } else if (!is_object($var)) {
         $string = print_r($var, true);
-      } else if (is_bool($var)) {
-        $string = $var ? 'true' : 'false';
       }
 
       $html[] =
