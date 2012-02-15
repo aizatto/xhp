@@ -10,6 +10,10 @@ class :symfony:a extends :symfony:route {
       $this->setAttribute('href', $this->getPath());
     }
 
+    if ($this->isCurrent()) {
+      $this->addClass('current');
+    }
+
     return $this->transferToElement(<a />);
   }
 

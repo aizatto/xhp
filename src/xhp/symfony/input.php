@@ -150,6 +150,10 @@ class :symfony:input extends :symfony:base {
         {$options}
       </select>;
 
+    if ($formview->get('multiple')) {
+      $element->setAttribute('multiple', 'multiple');
+    }
+
     return $this->transferFormViewAttributes($element);
   }
 

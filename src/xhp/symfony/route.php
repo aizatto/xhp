@@ -4,7 +4,8 @@ abstract class :symfony:route extends :symfony:base {
 
   attribute
     string route,
-    array params;
+    array params,
+    bool absolute;
 
   protected function getPath() {
     $route = $this->getAttribute('route');
@@ -19,7 +20,19 @@ abstract class :symfony:route extends :symfony:base {
     }
 
     $router = self::$container->get('router');
-    return $router->generate($route, $params);
+    return $router->generate($route, $params, $this->getAttribute('absolute'));
+  }
+
+  protected function isCurrent() {
+    $route = $this->getAttribute('route');
+    if (!$route) {
+      return false;
+    }
+
+    $request = self::$container->get('request');
+    $current_route = $request->attributes->get('_route');
+
+    return $route == $current_route;
   }
 
 }
