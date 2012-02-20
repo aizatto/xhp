@@ -1,0 +1,20 @@
+/**
+ * @provides image-block 
+ */
+.image-block-left,
+.image-block-right {
+  float: left;
+}
+
+.image-block-left * {
+  display: block;
+}
+
+.image-block-right {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.iamge-block-right-wrapper {
+  display: block;
+}

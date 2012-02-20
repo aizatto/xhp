@@ -32,6 +32,7 @@ class :symfony:input extends :symfony:base {
         break;
 
       case 'date':
+      case 'birthday':
         return $this->renderDate();
         break;
 
@@ -165,10 +166,15 @@ class :symfony:input extends :symfony:base {
       case 'text':
         return $this->renderDateText();
         break;
+
+      case 'choice':
+        return $this->renderDateChoice();
+        break;
     }
 
     throw new \Exception(sprintf('Unexpected widget: %s', $widget));
   }
+
   protected function renderDateText() {
     $formview = $this->getAttribute('formview');
 
@@ -183,6 +189,52 @@ class :symfony:input extends :symfony:base {
     $element = <div>{$html}</div>;
     $element->setAttribute('id', $formview->get('id'));
     return $this->transferAttributes($element);
+  }
+
+  /**
+   * TODO add option for 'pattern'
+   */
+  protected function renderDateChoice() {
+    $formview = $this->getAttribute('formview');
+    $html = array();
+
+    $date_pattern = $formview->get('date_pattern');
+    $values = preg_split(
+      '/({{ day }}|{{ month }}|{{ year }})/',
+      $date_pattern,
+      -1,
+      PREG_SPLIT_DELIM_CAPTURE);
+
+    $year = $formview['year'];
+    $month = $formview['month'];
+    $day = $formview['day'];
+
+    foreach ($values as $index => $value) {
+      switch ($value) {
+        case '{{ day }}':
+          $values[$index] = <symfony:input formview={$day} />;
+          break;
+
+        case '{{ month }}':
+          $values[$index] = <symfony:input formview={$month} />;
+          break;
+
+        case '{{ year }}':
+          $values[$index] = <symfony:input formview={$year} />;
+          break;
+
+        default:
+          // pass;
+          break;
+      }
+    }
+
+    $element =
+      <div id={$formview->get('id')}>
+        {$values}
+      </div>;
+
+    return $element;
   }
 
   protected function renderTextArea() {
