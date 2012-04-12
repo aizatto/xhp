@@ -16,7 +16,8 @@
 */
 
 abstract class :x:base {
-  abstract public function __construct();
+// aizatto: Doest not work in PHP v5.4
+//  abstract public function __construct();
   abstract public function appendChild($child);
   abstract public function getAttribute($attr);
   abstract public function setAttribute($attr, $val);
